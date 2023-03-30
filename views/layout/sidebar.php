@@ -5,7 +5,7 @@
             <a class="sidepanel-close d-xl-none" id="sidepanel-close" href="#">&times;</a>
             <div class="app-branding align-items-center mb-4">
                 <a class="app-logo d-flex " href="index.php">
-                    <img class="logo-icon m-1" src="./assets/img/uploads/apple-icon-noname.png" alt="logo">
+                    <img class="logo-icon m-1" src="./assets/img/logo/apple-icon-noname.png" alt="logo">
                     <div class="content">
                         <h3 class="fw-bold">Bookly</h3>
                         <p class="">End Of Alley</p>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
-    <link href="./assets/img/uploads/favicon.ico" rel="shortcut icon">
+    <link href="./assets/img/logo/favicon.ico" rel="shortcut icon">
 
     <!-- FontAwesome JS-->
     <script src="./assets/plugins/fontawesome/js/all.min.js" defer></script>

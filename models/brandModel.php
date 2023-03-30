@@ -68,7 +68,7 @@ function update_category()
         $message = "Danh mục đã tồn tại, Vui lòng sửa lại!";
     }
     include_once 'connect/closeConnect.php';
-    echo "<script>alert('$message');window.location.href='index.php?controller=brand';</script>";
+    echo "<script>alert('$message');</script>";
 }
 
 //fucntion xóa dữ liệu trên db
