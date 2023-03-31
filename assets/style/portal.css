@@ -5094,7 +5094,7 @@ fieldset:disabled .btn {
     padding-right: var(--bs-breadcrumb-item-padding-x);
     color: var(--bs-breadcrumb-divider-color);
     content: var(--bs-breadcrumb-divider, "/")
-    /* rtl: var(--bs-breadcrumb-divider, "/") */
+        /* rtl: var(--bs-breadcrumb-divider, "/") */
 }
 
 .breadcrumb-item.active {
@@ -6770,7 +6770,7 @@ fieldset:disabled .btn {
     to {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg)
-        /* rtl:ignore */
+            /* rtl:ignore */
     }
 }
 
@@ -6778,7 +6778,7 @@ fieldset:disabled .btn {
     to {
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg)
-        /* rtl:ignore */
+            /* rtl:ignore */
     }
 }
 
@@ -13644,12 +13644,30 @@ button.close:focus {
     font-size: .75rem
 }
 
-.app-card-orders-table .truncate {
-    max-width: 250px;
+.app-card-orders-table .truncate-product {
+    max-width: 25vh;
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap
+    /* white-space: nowrap */
+}
+
+.app-card-orders-table .truncate-category,
+.app-card-orders-table .truncate-price,
+.app-card-orders-table .truncate-author {
+    max-width: 20vh;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* white-space: nowrap */
+}
+
+.app-card-orders-table .truncate-quantity {
+    max-width: 10vh;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* white-space: nowrap */
 }
 
 .app-nav-tabs {

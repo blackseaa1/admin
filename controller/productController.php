@@ -21,7 +21,7 @@ switch ($action) {
                     location.href = "index.php?controller=product";
                 </script>';
         break;
-    case 'edit':
+    case 'edit_product':
         //Hiển thị form sửa
         include_once 'models/productModel.php';
         include_once 'views/product/edit.php';

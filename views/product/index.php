@@ -48,12 +48,12 @@
  										<tr>
  											<th>ID</th>
  											<th>Name</th>
- 											<th >Image</th>
+ 											<th>Image</th>
  											<th>Author</th>
- 											<th>Quantity</th>
+ 											<th class="text-lg-center">Quantity</th>
  											<th>Prices</th>
- 											<th>Category</th>
- 											<th>Created Date</th>
+ 											<th class="text-lg-center">Category</th>
+ 											<th class="text-lg-center">Created Date</th>
  											<th class="text-center">Operation</th>
  										</tr>
  									</thead>
@@ -64,28 +64,28 @@
  											<tr>
  												<td class="cell text-lg-start"> <?php echo $id++; ?></td>
  												<td class="cell text-lg-start">
- 													<span class="truncate"><?php echo $product['product_name']; ?></span>
+ 													<span class="truncate-product"><?php echo $product['product_name']; ?></span>
  												</td>
  												<td class="cell text-lg-start">
  													<img style="max-width: 200px; max-height: 200px;" src="../admin/assets/img/uploads/<?php echo $product['img']; ?>" alt="Book">
  												</td>
  												<td class="cell text-lg-start">
- 													<span><?php echo $product['author']; ?></span>
+ 													<span class="truncate-author"><?php echo $product['author']; ?></span>
+ 												</td>
+ 												<td class="cell text-lg-center">
+ 													<span class="truncate-quantity"><?php echo $product['quantity']; ?></span>
  												</td>
  												<td class="cell text-lg-start">
- 													<?php echo $product['quantity']; ?>
+ 													<span class="truncate-price p-2">$<?php echo $product['price']; ?></span>
  												</td>
- 												<td class="cell text-lg-start">
- 													<span class="badge bg-success p-2">$<?php echo $product['price']; ?></span>
- 												</td>
- 												<td class="cell text-lg-start">
- 													<span class="fs-6">
+ 												<td class="cell text-lg-center">
+ 													<span class="truncate-category fs-6">
  														<?php echo $product['category_name']; ?>
  													</span>
  												</td>
- 												<td class="cell text-lg-start"><span><?php echo $product['created_date']; ?></span></td>
- 												<td class="cell text-lg-start">
- 													<a href="index.php?controller=product&action=edit&id=<?php echo $product['id']; ?>">
+ 												<td class="cell text-lg-center"><span class="truncate-category"><?php echo $product['created_date']; ?></span></td>
+ 												<td class="cell text-lg-center">
+ 													<a href="index.php?controller=product&action=edit_product&id=<?php echo $product['id']; ?>">
  														<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
  															<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
  															<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />

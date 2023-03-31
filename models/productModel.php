@@ -2,8 +2,6 @@
 function index_product()
 {
     include_once 'connect/openConnnect.php';
-    //    $sql= "select * from tbl_account";
-    // $sql= "SELECT * FROM tbl_product INNER JOIN category ON tbl_product.category_id= category.category_id" ;
     $sql = "SELECT tbl_product.*, category.category_name AS category_name FROM tbl_product INNER JOIN category ON tbl_product.category_id = category.category_id";
     $products = mysqli_query($connect, $sql);
     include_once './connect/closeConnect.php';
@@ -47,7 +45,7 @@ function store_product()
     echo "<script>alert('$msg');window.location.href='index.php?controller=product';</script>";
 }
 
-function edit()
+function edit_product()
 {
     $id = $_GET['id'];
     include_once './connect/openConnnect.php';
@@ -132,8 +130,8 @@ switch ($action) {
     case 'store_product':
         store_product();
         break;
-    case 'edit':
-        $array = edit();
+    case 'edit_product':
+        $array = edit_product();
         break;
     case 'update_product':
         update_product();

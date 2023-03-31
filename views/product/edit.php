@@ -4,7 +4,7 @@
 
             <div class="row g-3 mb-4 align-items-center justify-content-between">
                 <div class="col-auto">
-                    <h1 class="app-page-title mb-0">Cập Nhật Sản Phảm</h1>
+                    <h1 class="app-page-title mb-0">Cập Nhật Sản Phẩm</h1>
                 </div>
                 <div class="col-auto">
                     <div class="page-utilities">
@@ -74,28 +74,82 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4 text-center">
-                                    <div class="tm-product-img-edit mx-auto card p-3 d-flex align-items-center">
-                                        <img class=" d-block mx-auto pb-2" src="../admin/assets/img/uploads/<?php echo $product['img']; ?>" alt="Product image" style="max-width: 300px; max-height: 300px;">
-                                        <i class="fas fa-cloud-upload-alt tm-upload-icon" onclick="document.getElementById('fileInput').click();"></i>
+                                    <div class="mb-3">
+                                        <div class="card p-3 d-flex">
+                                            <a class="text-center pb-4" onclick="changeImage()"><img id="preview" class="product-img" src="../admin/assets/img/uploads/<?php echo $product['img']; ?>" alt="Ảnh xem trước" style="max-width: 300px; max-height: 300px;"></a>
+                                            <input class="d-none" class="form-control" id="img" name="img" type="file" onchange="previewImage()">
+                                            <label class="form-label text-black btn btn-secondary text-white" for="img">Đổi Ảnh Khác</label>
+                                        </div>
                                     </div>
-                                    <div class="custom-file mt-3 mb-3">
-                                        <input id="fileInput" name="imgFile" type="file" style="display:none;">
-                                        <input class="btn btn-primary btn-block mx-auto text-white" type="button" value="CHANGE IMAGE NOW" onclick="document.getElementById('fileInput').click();">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary text-white fs-5" name="submit" type="submit">Cập Nhật</button>
                                 </div>
                             </div>
-                        </form>
-                    <?php
-                    }
-                    ?>
+                            <div class="col-12">
+                                <button class="btn btn-primary text-white fs-5" name="submit" type="submit">Cập Nhật</button>
+                            </div>
                 </div>
+                </form>
+            <?php
+                    }
+            ?>
             </div>
-
-
         </div>
 
+
     </div>
+
 </div>
+</div>
+
+<script>
+    function previewImage() {
+        var preview = document.getElementById("preview");
+        var fileInput = document.getElementById("img");
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            preview.src = reader.result;
+            document.getElementById("image-preview").style.display = "block";
+            document.getElementById("image-preview-none").style.display = "none";
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = document.getElementById("preview").src;
+        }
+    }
+
+    function changeImage() {
+        document.getElementById("img").value = "";
+        document.getElementById("image-preview").style.display = "none";
+        document.getElementById("image-preview-none").style.display = "block";
+    }
+
+    function changeProductImage() {
+        var fileInput = document.getElementById("img");
+        var file = fileInput.files[0];
+        var productId = <?php echo $product['id']; ?>;
+
+        if (file || !fileInput.value) {
+            var formData = new FormData();
+            formData.append("img", file);
+            formData.append("id", productId);
+
+            $.ajax({
+                url: "change_product_image.php",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function() {
+                    window.location.reload();
+                }
+            });
+        }
+    }
+
+    function changeImage() {
+        img.click();
+    }
+</script>
