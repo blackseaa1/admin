@@ -76,7 +76,7 @@
  													<span class="truncate-quantity"><?php echo $product['quantity']; ?></span>
  												</td>
  												<td class="cell text-lg-start">
- 													<span class="truncate-price p-2">$<?php echo $product['price']; ?></span>
+ 													<span class="truncate-price p-2"><?php echo $product['price']; ?>đ</span>
  												</td>
  												<td class="cell text-lg-center">
  													<span class="truncate-category fs-6">

@@ -31,12 +31,13 @@ function store_category()
         }
     } else {
         $message = "Danh mục đã tồn tại, Vui lòng thêm lại!";
+        echo "<script>alert('$message');window.history.back();</script>";
     }
 
     // Đóng kết nối đến database
     include_once 'connect/closeConnect.php';
     // Hiển thị thông báo
-    echo "<script>alert('$message');window.location.href='index.php?controller=brand';</script>";
+    echo "<script>alert('$message');</script>";
 }
 //function lấy dữ liệu trên db dựa theo id
 function edit_category()
@@ -61,14 +62,17 @@ function update_category()
         $sql = "UPDATE category SET category_name = '$category_name' WHERE category_id = '$id'";
         if (mysqli_query($connect, $sql)) {
             $message = "Cập nhật danh mục thành công";
+            echo "<script>alert('$message');</script>";
         } else {
             $message = "Lỗi: " . mysqli_error($connect);
+            echo "<script>alert('$message');</script>";
+            echo "<script>window.history.back();</script>";
         }
     } else {
         $message = "Danh mục đã tồn tại, Vui lòng sửa lại!";
+        echo "<script>alert('$message');<script>window.history.back();</script>";
     }
     include_once 'connect/closeConnect.php';
-    echo "<script>alert('$message');</script>";
 }
 
 //fucntion xóa dữ liệu trên db

@@ -42,7 +42,7 @@ function store_product()
         $msg = "Thêm sản phẩm thành công!";
     }
     include_once './connect/closeConnect.php';
-    echo "<script>alert('$msg');window.location.href='index.php?controller=product';</script>";
+    echo "<script>alert('$msg');</script>";
 }
 
 function edit_product()
@@ -79,7 +79,7 @@ function update_product()
 
     if (!$product) {
         $msg = "Không tìm thấy sản phẩm!";
-        echo "<script>alert('$msg');window.location.href='index.php?controller=product';</script>";
+        echo "<script>alert('$msg');</script>";
     } else {
         // Check if the new product_name is unique within the same category
         $result = mysqli_query($connect, "SELECT * FROM tbl_product WHERE category_id = $category_id AND product_name = '$product_name' AND id != $id");
@@ -103,7 +103,7 @@ function update_product()
             $sql .= " WHERE id = $id";
             mysqli_query($connect, $sql);
             $msg = "Cập nhật sản phẩm thành công!";
-            echo "<script>alert('$msg');window.location.href='index.php?controller=product';</script>";
+            echo "<script>alert('$msg');</script>";
         }
     }
     include_once './connect/closeConnect.php';

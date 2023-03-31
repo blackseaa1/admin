@@ -94,4 +94,3 @@ searchMobileTrigger.addEventListener('click', () => {
 });
 
 
-
