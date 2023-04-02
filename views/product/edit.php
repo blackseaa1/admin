@@ -17,14 +17,18 @@
                     </div>
                 </div>
             </div>
+            <?php
+            foreach ($array['products'] as $product) {
+            ?>
 
-            <div class="card-body bg-white p-4 border rounded">
-                <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-                    <?php
-                    foreach ($array['products'] as $product) {
-                    ?>
+                <div class="text-end"> <span class="text-red fst-italic">Ngày tạo: <small class="text-danger"><?php echo $product['created_date']; ?></small>
+                        <span class="text-red fst-italic">Cập nhật gần đây nhất: <small class="text-danger"><?php echo $product['updated_date']; ?></small>
+                </div>
+
+                <div class="card-body bg-white p-4 border rounded">
+                    <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
                         <form class="tm-edit-product-form" action="index.php?controller=product&action=update_product" enctype="multipart/form-data" method="post">
-                            <input name="id" type="hidden" value="<?= $product['id'] ?>">
+                            <input name="product_id" type="hidden" value="<?= $product['product_id'] ?>">
                             <div class="row tm-edit-product-row">
                                 <div class="col-xl-6 col-lg-6 col-md-12">
                                     <div class="form-group mb-3">
@@ -36,12 +40,26 @@
                                         <textarea class="form-control" name="description" type="text" rows="4" cols="50"></textarea>
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label class="form-label text-black" for="exampleInputPassword1">Tác giả</label>
-                                        <input class="form-control" id="exampleInputPassword1" name="author" type="text" value="<?php echo $product['author']; ?>">
+                                        <label class="form-label text-black" for="author_id">Tác giả</label>
+                                        <select class="form-select" name="author_id" aria-label="Default select example">
+                                            <?php
+                                            foreach ($array['authors'] as $author) {
+                                            ?>
+                                                <option value="<?= $author['author_id'] ?>" <?php
+                                                                                            if ($author['author_id'] == $product['author_id']) {
+                                                                                                echo 'selected';
+                                                                                            }
+                                                                                            ?>>
+                                                    <?= $author['author_name'] ?>
+                                                </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
 
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label class="form-label text-black" for="exampleInputPassword1">Danh mục</label>
+                                        <label class="form-label text-black" for="category_id">Danh mục</label>
                                         <select class="form-select" name="category_id" aria-label="Default select example">
                                             <option value=""> - Choose - </option>
                                             <?php
@@ -60,6 +78,24 @@
                                         </select>
                                     </div>
                                     <div class="form-group mb-3">
+                                        <label class="form-label text-black" for="publishing_company_id">Nhà xuất bản</label>
+                                        <select class="form-select" name="publishing_company_id" aria-label="Default select example">
+                                            <?php
+                                            foreach ($array['publishing_companys'] as $publishing_company) {
+                                            ?>
+                                                <option value="<?= $publishing_company['publishing_company_id'] ?>" <?php
+                                                                                            if ($publishing_company['publishing_company_id'] == $product['publishing_company_id']) {
+                                                                                                echo 'selected';
+                                                                                            }
+                                                                                            ?>>
+                                                    <?= $publishing_company['publishing_company_name'] ?>
+                                                </option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
                                         <label class="form-label text-black" for="exampleInputPassword1">Giá</label>
                                         <input class="form-control" id="exampleInputPassword1" name="price" type="text" value="<?php echo $product['price']; ?>">
 
@@ -67,10 +103,6 @@
                                     <div class="form-group mb-3">
                                         <label class="form-label text-black" for="exampleInputPassword1">Số lượng</label>
                                         <input class="form-control" id="exampleInputPassword1" name="quantity" type="number" value="<?php echo $product['quantity']; ?>">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <label class="form-label text-black" for="created_date">Ngày Sửa</label>
-                                        <input required class="form-control" id="created_date" name="created_date" type="date">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4 text-center">
@@ -86,12 +118,12 @@
                             <div class="col-12">
                                 <button class="btn btn-primary text-white fs-5" name="submit" type="submit">Cập Nhật</button>
                             </div>
+                    </div>
+                    </form>
                 </div>
-                </form>
             <?php
-                    }
+            }
             ?>
-            </div>
         </div>
 
 

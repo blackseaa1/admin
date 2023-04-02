@@ -3,10 +3,10 @@
 function index()
 {
     include_once 'connect/openConnnect.php';
-    $sql = "SELECT * FROM category";
-    $brands = mysqli_query($connect, $sql);
+    $sql = "SELECT * FROM tbl_category";
+    $categorys = mysqli_query($connect, $sql);
     include_once './connect/closeConnect.php';
-    return $brands;
+    return $categorys;
 }
 
 //    Function lưu dữ liệu lên DB
@@ -19,11 +19,11 @@ function store_category()
         die("Kết nối thất bại: " . mysqli_connect_error());
     }
     // Kiểm tra dữ liệu đã tồn tại trong database hay chưa
-    $sql = "SELECT * FROM category WHERE category_name = '$category_name'";
+    $sql = "SELECT * FROM tbl_category WHERE category_name = '$category_name'";
     $result = mysqli_query($connect, $sql);
     // Nếu dữ liệu chưa tồn tại trong database thì thêm mới
     if (mysqli_num_rows($result) == 0) {
-        $sql = "INSERT INTO category(category_name) VALUES ('$category_name')";
+        $sql = "INSERT INTO tbl_category(category_name) VALUES ('$category_name')";
         if (mysqli_query($connect, $sql)) {
             $message = "Thêm danh mục thành công";
         } else {
@@ -44,10 +44,10 @@ function edit_category()
 {
     $id = $_GET['category_id'];
     include_once 'connect/openConnnect.php';
-    $sql = "SELECT * FROM category WHERE category_id = '$id'";
-    $brands = mysqli_query($connect, $sql);
+    $sql = "SELECT * FROM tbl_category WHERE category_id = '$id'";
+    $categorys = mysqli_query($connect, $sql);
     include_once 'connect/closeConnect.php';
-    return $brands;
+    return $categorys;
 }
 //    function update dữ liệu trên db
 function update_category()
@@ -56,7 +56,7 @@ function update_category()
     $category_name = $_POST['category_name'];
     include_once 'connect/openConnnect.php';
     // Kiểm tra dữ liệu đã tồn tại trong database hay chưa
-    $sql = "SELECT * FROM category WHERE category_name = '$category_name' AND category_id != '$id'";
+    $sql = "SELECT * FROM tbl_category WHERE category_name = '$category_name' AND category_id != '$id'";
     $result = mysqli_query($connect, $sql);
     if (mysqli_num_rows($result) == 0) {
         $sql = "UPDATE category SET category_name = '$category_name' WHERE category_id = '$id'";
@@ -86,7 +86,7 @@ function destroy_category()
     mysqli_query($connect, $delete_products_sql);
 
     // Delete the record in category
-    $delete_category_sql = "DELETE FROM category WHERE category_id = '$id'";
+    $delete_category_sql = "DELETE FROM tbl_category WHERE category_id = '$id'";
     if (mysqli_query($connect, $delete_category_sql)) {
         $message = "Xóa danh mục thành công";
     } else {
@@ -99,7 +99,7 @@ function destroy_category()
 switch ($action) {
     case '':
         //Lấy dữ liệu từ DB về
-        $brands = index();
+        $categorys = index();
         break;
     case 'store_category':
         //            Lưu dữ liệu lên DB
@@ -107,7 +107,7 @@ switch ($action) {
         break;
     case 'edit_category':
         //Lấy dữ liệu từ DB về dựa trên id
-        $brands = edit_category();
+        $categorys = edit_category();
         break;
     case 'update_category':
         //chỉnh sửa dữ liệu lên db

@@ -18,14 +18,14 @@
                         </div><!--//table-utilities-->
                     </div><!--//col-auto-->
                 </div><!--//row-->
-                <?php foreach ($brands as $brand) {?>
+                <?php foreach ($categorys as $category) {?>
                 <div class="card-body bg-white p-4 border rounded">
                     <form method="post" action="index.php?controller=brand&action=update_category">
-                        <input type="hidden" name="category_id" value="<?= $brand['category_id'] ?>">
+                        <input type="hidden" name="category_id" value="<?= $category['category_id'] ?>">
                         <div class="mb-3">
                             <label class="form-label" >Tên Danh Mục</label>
                             <input class="form-control" name="category_name" type="text"
-                            value="<?php echo $brand['category_name']?>">
+                            value="<?php echo $category['category_name']?>">
                         </div>
                         <button class="btn btn-primary text-white fs-5" name="submit" type="submit">Cập Nhật</button>
 

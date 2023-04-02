@@ -43,15 +43,15 @@
 							<textarea class="form-control" id="description" name="description" type="text" rows="4" cols="50"></textarea>
 						</div>
 						<div class="mb-3">
-							<label class="form-label text-black" for="author">Tác giả</label>
-							<input required class="form-control" id="author" name="author" type="text">
+							<label class="form-label text-black" for="author_name">Tác giả</label>
+							<input required class="form-control" id="author_name" name="author_name" type="text">
 						</div>
 						<div class="mb-3">
 							<label class="form-label text-black" for="category_id">Danh mục</label>
 							<select class="form-select" id="category_id" name="category_id" aria-label="Default select example" required>
 								<option value=""> - Chọn Danh Mục - </option>
 								<?php
-								foreach ($categorys as $category) {
+								foreach ($array['categorys']  as $category) {
 								?>
 									<option value="<?= $category['category_id'] ?>">
 										<?= $category['category_name'] ?>
@@ -60,6 +60,10 @@
 								}
 								?>
 							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label text-black" for="publishing_company_name">Nhà xuất bản</label></label>
+							<input required class="form-control" id="publishing_company_name" name="publishing_company_name" type="text">
 						</div>
 						<div class="mb-3">
 							<label class="form-label text-black" for="price">Giá</label>
@@ -71,7 +75,7 @@
 						</div>
 						<div class="mb-3">
 							<label class="form-label text-black" for="created_date">Ngày tạo</label>
-							<input required class="form-control" id="created_date" name="created_date" type="date">
+							<input required class="form-control" id="created_date" name="created_date" type="datetime-local">
 						</div>
 						<!--                        <button type="submit" name="backsubmit" class="btn btn-outline-dark">Back to products</button>-->
 						<button class="btn btn-primary text-white fs-5" name="submit" type="submit">Thêm Sản Phẩm</button>

@@ -33,7 +33,7 @@
 									</select>
 								</div>
 								<div class="col-auto">
-									<a class="btn app-btn-secondary bg-success text-white" href="index.php?controller=customer&action=create">
+									<a class="btn app-btn-secondary bg-success text-white" href="index.php?controller=customer&action=create_customer">
 										+ Thêm Người Dùng</a>
 								</div>
 							</div><!--//row-->
@@ -62,8 +62,8 @@
 												<th>User Name</th>
 												<th>Email</th>
 												<th>Phone</th>
-												<td>Role</td>
-												<td>Operation</td>
+												<th>Role</th>
+												<th>Operation</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -91,27 +91,29 @@
 													</td>
 													<td class="cell">
 														<?php
-														if ($customer['role'] == 'customer') {
+														if ($customer['role_id'] == '1') {
 														?>
-															<span class="badge bg-warning text-white">
-																<?php echo $customer['role'] ?>
+															<span class="badge bg-danger text-white">
+																<?php echo $customer['role_name'] ?>
 															</span>
 														<?php
-														} elseif ($customer['role'] == 'admin') { ?>
-															<span class="badge bg-success text-white">
-																<?php echo $customer['role'] ?>
-															<?php
+														} elseif ($customer['role_id'] == '2') { ?>
+															<span class="badge bg-info text-white">
+																<?php echo $customer['role_name'] ?>
+															</span>
+														<?php
 														}
-															?>
+														?>
+
 													</td>
 													<td class="cell">
-														<a href="index.php?controller=customer&action=edit&id=<?= $customer['id'] ?>">
+														<a href="index.php?controller=customer&action=edit_customer&account_id=<?= $customer['account_id'] ?>">
 															<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
 																<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
 																<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
 															</svg>
 														</a>
-														<a class="" onclick="return confirm('Bạn có chắc chắn muốn xóa *<?= $customer['username'] ?>* không ?')" href='index.php?controller=customer&action=destroy&id=<?= $customer['id'] ?>'>
+														<a class="" onclick="return confirm('Bạn có chắc chắn muốn xóa *<?= $customer['fullname'] ?>* không ?')" href='index.php?controller=customer&action=destroy&account_id=<?= $customer['account_id'] ?>'>
 															<svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
 																<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
 																<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
@@ -152,68 +154,80 @@
 						<div class="app-card app-card-orders-table mb-5">
 							<div class="app-card-body">
 								<div class="table-responsive">
-
-									<table class="table mb-0 text-left">
+									<table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
 												<th>Id</th>
-												<th>Username</th>
-												<!--        <th >Password</th>-->
+												<th>Full Name</th>
+												<th>User Name</th>
 												<th>Email</th>
 												<th>Phone</th>
-												<td>Role</td>
-												<td>Operation</td>
-												<td></td>
+												<th>Role</th>
+												<th>Operation</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td class="cell">#15346</td>
-												<td class="cell"><span class="truncate">Lorem ipsum dolor sit amet eget volutpat erat</span></td>
-												<td class="cell">John Sanders</td>
-												<td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td>
-												<td class="cell">
+											<?php
+											$id = 1;
+											foreach ($customers as $customer) {
+												if ($customer['role_id'] == '1') {
+											?>
+													<tr>
+													<td class="cell"><?php echo $id++ ?></td>
+													<td class="cell">
+														<span class="truncate">
+															<?php echo $customer['fullname'] ?>
+														</span>
+													</td>
+													<td class="cell">
+														<span class="truncate">
+															<?php echo $customer['username'] ?>
+														</span>
+													</td>
+													<td class="cell"><?php echo $customer['email'] ?></td>
+													<td class="cell">
+														<span>
+															<?php echo $customer['phone'] ?>
+														</span>
+													</td>
+													<td class="cell">
+														<?php
+														if ($customer['role_id'] == '1') {
+														?>
+															<span class="badge bg-danger text-white">
+																<?php echo $customer['role_name'] ?>
+															</span>
+														<?php
+														} elseif ($customer['role_id'] == '2') { ?>
+															<span class="badge bg-info text-white">
+																<?php echo $customer['role_name'] ?>
+															</span>
+														<?php
+														}
+														?>
 
-													<span class="badge bg-success">Admin</span>
-												</td>
-												<td class="cell">$259.35</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
-											</tr>
-
-											<tr>
-												<td class="cell">#15344</td>
-												<td class="cell"><span class="truncate">Pellentesque diam imperdiet</span></td>
-												<td class="cell">Teresa Holland</td>
-												<td class="cell"><span class="cell-data">16 Oct</span><span class="note">01:16 AM</span></td>
-												<td class="cell"><span class="badge bg-success">Paid</span></td>
-												<td class="cell">$123.00</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
-											</tr>
-
-											<tr>
-												<td class="cell">#15343</td>
-												<td class="cell"><span class="truncate">Vestibulum a accumsan lectus sed mollis ipsum</span></td>
-												<td class="cell">Jayden Massey</td>
-												<td class="cell"><span class="cell-data">15 Oct</span><span class="note">8:07 PM</span></td>
-												<td class="cell"><span class="badge bg-success">Paid</span></td>
-												<td class="cell">$199.00</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
-											</tr>
-
-
-											<tr>
-												<td class="cell">#15341</td>
-												<td class="cell"><span class="truncate">Morbi vulputate lacinia neque et sollicitudin</span></td>
-												<td class="cell">Raymond Atkins</td>
-												<td class="cell"><span class="cell-data">11 Oct</span><span class="note">11:18 AM</span></td>
-												<td class="cell"><span class="badge bg-success">Paid</span></td>
-												<td class="cell">$678.26</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
-											</tr>
-
+													</td>
+													<td class="cell">
+														<a href="index.php?controller=customer&action=edit_customer&account_id=<?= $customer['account_id'] ?>">
+															<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+																<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+																<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+															</svg>
+														</a>
+														<a class="" onclick="return confirm('Bạn có chắc chắn muốn xóa *<?= $customer['fullname'] ?>* không ?')" href='index.php?controller=customer&action=destroy&account_id=<?= $customer['account_id'] ?>'>
+															<svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+																<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+																<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+															</svg>
+														</a>
+													</td>
+												</tr>
+											<?php
+											}}
+											?>
 										</tbody>
 									</table>
-								</div><!--//table-responsive-->
+								</div>
 							</div><!--//app-card-body-->
 						</div><!--//app-card-->
 					</div><!--//tab-pane-->
@@ -222,29 +236,77 @@
 						<div class="app-card app-card-orders-table mb-5">
 							<div class="app-card-body">
 								<div class="table-responsive">
-									<table class="table mb-0 text-left">
+									<table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
 												<th>Id</th>
-												<th>Username</th>
-												<!--        <th >Password</th>-->
+												<th>Full Name</th>
+												<th>User Name</th>
 												<th>Email</th>
 												<th>Phone</th>
-												<td>Role</td>
-												<td>Operation</td>
-												<td></td>
+												<th>Role</th>
+												<th>Operation</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td class="cell">#15345</td>
-												<td class="cell"><span class="truncate">Consectetur adipiscing elit</span></td>
-												<td class="cell">Dylan Ambrose</td>
-												<td class="cell"><span class="cell-data">16 Oct</span><span class="note">03:16 AM</span></td>
-												<td class="cell"><span class="badge bg-warning">Pending</span></td>
-												<td class="cell">$96.20</td>
-												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
-											</tr>
+											<?php
+											$id = 1;
+											foreach ($customers as $customer) {
+												if ($customer['role_id'] == '2') {
+											?>
+													<tr>
+													<td class="cell"><?php echo $id++ ?></td>
+													<td class="cell">
+														<span class="truncate">
+															<?php echo $customer['fullname'] ?>
+														</span>
+													</td>
+													<td class="cell">
+														<span class="truncate">
+															<?php echo $customer['username'] ?>
+														</span>
+													</td>
+													<td class="cell"><?php echo $customer['email'] ?></td>
+													<td class="cell">
+														<span>
+															<?php echo $customer['phone'] ?>
+														</span>
+													</td>
+													<td class="cell">
+														<?php
+														if ($customer['role_id'] == '1') {
+														?>
+															<span class="badge bg-danger text-white">
+																<?php echo $customer['role_name'] ?>
+															</span>
+														<?php
+														} elseif ($customer['role_id'] == '2') { ?>
+															<span class="badge bg-info text-white">
+																<?php echo $customer['role_name'] ?>
+															</span>
+														<?php
+														}
+														?>
+
+													</td>
+													<td class="cell">
+														<a href="index.php?controller=customer&action=edit_customer&account_id=<?= $customer['account_id'] ?>">
+															<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+																<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+																<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+															</svg>
+														</a>
+														<a class="" onclick="return confirm('Bạn có chắc chắn muốn xóa *<?= $customer['fullname'] ?>* không ?')" href='index.php?controller=customer&action=destroy&account_id=<?= $customer['account_id'] ?>'>
+															<svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+																<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+																<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+															</svg>
+														</a>
+													</td>
+												</tr>
+											<?php
+											}}
+											?>
 										</tbody>
 									</table>
 								</div><!--//table-responsive-->
